@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: adebbb83c12fa9d40a9b27c543bccffa
+guid: 25e20ffbcc01d4d459fcdc271f9e5edf
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Running
+    second: CrouchIdle
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Running
+      name: CrouchIdle
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 19
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
