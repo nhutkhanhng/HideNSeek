@@ -1,3 +1,5 @@
+﻿using UnityEngine;
+
 namespace Lightbug.CharacterControllerPro.Implementation
 {
 
@@ -78,7 +80,7 @@ public struct CharacterActions
     {
         if( inputHandler == null )
 			return;
-        
+
 		@jump.value = inputHandler.GetBool( "Jump" );
 		@run.value = inputHandler.GetBool( "Run" );
 		@interact.value = inputHandler.GetBool( "Interact" );
