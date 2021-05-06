@@ -23,10 +23,6 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         public VerticalMovementParameters verticalMovementParameters = new VerticalMovementParameters();
 
-
-        public LookingDirectionParameters lookingDirectionParameters = new LookingDirectionParameters();
-
-
         [Header("Animation")]
 
         [SerializeField]
@@ -66,7 +62,6 @@ namespace Lightbug.CharacterControllerPro.Demo
         protected bool groundedJumpAvailable = true;
 
 
-        protected Vector3 targetLookingDirection = default(Vector3);
         protected float targetHeight = 1f;
 
         protected PlanarMovementParameters.PlanarMovementProperties currentMotion = new PlanarMovementParameters.PlanarMovementProperties();
@@ -355,75 +350,6 @@ namespace Lightbug.CharacterControllerPro.Demo
         }
 
 
-        protected virtual void HandleRotation(float dt)
-        {
-            HandleLookingDirection(dt);
-        }
-
-        void HandleLookingDirection(float dt)
-        {
-            if (!CharacterActor.CharacterBody.Is2D && lookingDirectionParameters.followExternalReference)
-            {
-                targetLookingDirection = CharacterStateController.MovementReferenceForward;
-            }
-            else
-            {
-                switch (CharacterActor.CurrentState)
-                {
-                    case CharacterActorState.NotGrounded:
-
-                        if (CharacterActor.PlanarVelocity != Vector3.zero)
-                            targetLookingDirection = CharacterActor.PlanarVelocity;
-
-                        break;
-                    case CharacterActorState.StableGrounded:
-
-                        if (CharacterStateController.InputMovementReference != Vector3.zero)
-                            targetLookingDirection = CharacterStateController.InputMovementReference;
-                        else
-                            targetLookingDirection = CharacterActor.Forward;
-
-
-                        break;
-                    case CharacterActorState.UnstableGrounded:
-
-                        if (CharacterActor.PlanarVelocity != Vector3.zero)
-                            targetLookingDirection = CharacterActor.PlanarVelocity;
-
-                        break;
-                }
-
-            }
-
-
-            Quaternion targetDeltaRotation = Quaternion.FromToRotation(CharacterActor.Forward, targetLookingDirection);
-            Quaternion currentDeltaRotation = Quaternion.Slerp(Quaternion.identity, targetDeltaRotation, 10 * dt);
-
-
-            if (CharacterActor.CharacterBody.Is2D)
-            {
-                CharacterActor.Forward = targetLookingDirection;
-            }
-            else
-            {
-                float angle = Vector3.Angle(CharacterActor.Forward, targetLookingDirection);
-
-                if (CustomUtilities.isCloseTo(angle, 180f, 0.5f))
-                {
-
-                    CharacterActor.Forward = Quaternion.Euler(0f, 1f, 0f) * CharacterActor.Forward;
-                }
-
-                CharacterActor.Forward = currentDeltaRotation * CharacterActor.Forward;
-
-            }
-
-
-
-        }
-
-
-
         public override void UpdateBehaviour(float dt)
         {
             HandleSize(dt);
@@ -498,8 +424,6 @@ namespace Lightbug.CharacterControllerPro.Demo
             ProcessVerticalMovement(dt);
             ProcessPlanarMovement(dt);
         }
-
-
     }
 
 
