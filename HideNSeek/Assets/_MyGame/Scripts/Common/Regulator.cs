@@ -6,10 +6,11 @@ class Regulator
 {
 
     //the time period between updates 
-    float m_dUpdatePeriod;
+    private float m_dUpdatePeriod;
 
     //the next time the regulator allows code flow
-    float m_dwNextUpdateTime;
+    private float m_dwNextUpdateTime;
+
     public Regulator(float NumUpdatesPerSecondRqd)
     {
         m_dwNextUpdateTime = (Time.time + UnityEngine.Random.Range(0.0f, 1f) * 1000);

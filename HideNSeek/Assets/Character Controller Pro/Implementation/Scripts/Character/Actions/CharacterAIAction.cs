@@ -5,25 +5,25 @@ using Lightbug.CharacterControllerPro.Implementation;
 namespace Lightbug.CharacterControllerPro.Demo
 {
 
-public enum SequenceType
-{
-    Duration ,
-    OnWallHit
-}
+    public enum SequenceType
+    {
+        Duration,
+        OnWallHit
+    }
 
-/// <summary>
-/// This class represents a sequence action, executed by the AI brain in sequence behaviour mode.
-/// </summary>
-[System.Serializable]
-public class CharacterAIAction
-{
-    public SequenceType sequenceType;
+    /// <summary>
+    /// This class represents a sequence action, executed by the AI brain in sequence behaviour mode.
+    /// </summary>
+    [System.Serializable]
+    public class CharacterAIAction
+    {
+        public SequenceType sequenceType;
 
-	[Min(0f)]
-	public float duration = 1;
+        [Min(0f)]
+        public float duration = 1;
 
-	public CharacterActions action = new CharacterActions();
-    
-}
+        public CharacterActions action = new CharacterActions();
+
+    }
 
 }

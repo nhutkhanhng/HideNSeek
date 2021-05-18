@@ -16,16 +16,13 @@ namespace Lightbug.CharacterControllerPro.Implementation
 public class CharacterBrain : MonoBehaviour
 {
     
-    [SerializeField]
-    bool isAI = false;
+    [SerializeField]    bool isAI = false;
 
-	[SerializeField]
-	InputHandlerSettings inputHandlerSettings = new InputHandlerSettings();
+	[SerializeField]	InputHandlerSettings inputHandlerSettings = new InputHandlerSettings();
 		
 
     // AI brain -------------------------------------------------------------------------------
-    [SerializeField]
-	CharacterAIBehaviour aiBehaviour = null;
+    [SerializeField]	CharacterAIBehaviour aiBehaviour = null;
 
 	CharacterAIBehaviour currentAIBehaviour = null;
 	
@@ -33,8 +30,7 @@ public class CharacterBrain : MonoBehaviour
     // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 	// ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-	[SerializeField]
-	CharacterActions characterActions = new CharacterActions();
+	[SerializeField]	CharacterActions characterActions = new CharacterActions();
 
 	
 	bool dirty = false;
