@@ -62,6 +62,5 @@ namespace RavenAI
         public bool isActive() { return m_iStatus == _Goal.Active; }
         public bool isInactive() { return m_iStatus == _Goal.Inactive; }
         public bool hasFailed() { return m_iStatus == _Goal.Failed; }
-        public int GetType() { return m_iType; }
     }
 }
