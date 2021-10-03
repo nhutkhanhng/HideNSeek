@@ -17,7 +17,7 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         void HandleLookingDirection(float dt)
         {
-            if (!CharacterActor.CharacterBody.Is2D && lookingDirectionParameters.followExternalReference)
+            if (lookingDirectionParameters.followExternalReference)
             {
                 targetLookingDirection = CharacterStateController.MovementReferenceForward;
             }
@@ -55,11 +55,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             Quaternion currentDeltaRotation = Quaternion.Slerp(Quaternion.identity, targetDeltaRotation, 10 * dt);
 
 
-            if (CharacterActor.CharacterBody.Is2D)
-            {
-                CharacterActor.Forward = targetLookingDirection;
-            }
-            else
+
             {
                 float angle = Vector3.Angle(CharacterActor.Forward, targetLookingDirection);
 
@@ -77,7 +73,7 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         }
 
-        
+
         protected virtual void HandleRotation(float dt)
         {
             HandleLookingDirection(dt);

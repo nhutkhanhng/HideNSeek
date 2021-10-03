@@ -328,10 +328,6 @@ public class LedgeHanging : CharacterState
 	{       
         Vector3 forwardDirection = transform.forward;
         
-        if( characterBody != null )
-            if( characterBody.Is2D )
-                forwardDirection = transform.right;
-        
         Vector3 sideDirection = Vector3.Cross( transform.up , forwardDirection );
 
         

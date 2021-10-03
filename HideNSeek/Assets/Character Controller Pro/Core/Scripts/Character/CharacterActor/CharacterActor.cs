@@ -26,14 +26,11 @@ namespace Lightbug.CharacterControllerPro.Core
     {
 
         [Header("Stability")]
-
         [Tooltip("The slope limit set the maximum angle considered as stable.")]
-
         [Range(1f, 85f)]
         public float slopeLimit = 60f;
 
         [Header("Grounding")]
-
         [Tooltip("Prevents the character from enter grounded state (IsGrounded will be false)")]
         public bool alwaysNotGrounded = false;
 
@@ -154,42 +151,14 @@ namespace Lightbug.CharacterControllerPro.Core
             }
         }
 
-        // CapsuleCollider capsuleCollider3D = null;
-        // Rigidbody rigidbody3D = null;
-
-        // CapsuleCollider2D capsuleCollider2D = null;
-        // new Rigidbody2D rigidbody2D = null;
-
-
-
-        /// <summary>
-        /// Gets the CharacterBody component associated with this character actor.
-        /// </summary>
-        public bool Is2D => CharacterBody.Is2D;
-
-        /// <summary>
-        /// Gets the RigidbodyComponent component associated with the character.
-        /// </summary>
         public RigidbodyComponent RigidbodyComponent => CharacterBody.RigidbodyComponent;
 
-        /// <summary>
-        /// Gets the ColliderComponent component associated with the character.
-        /// </summary>
         public ColliderComponent ColliderComponent => CharacterBody.ColliderComponent;
 
-        /// <summary>
-        /// Gets the physics component from the character.
-        /// </summary>
         public PhysicsComponent PhysicsComponent { get; private set; }
 
-        /// <summary>
-        /// Gets the CharacterBody component associated with this character actor.
-        /// </summary>
         public CharacterBody CharacterBody { get; private set; }
 
-        /// <summary>
-        /// Returns the current character actor state. This enum variable contains the information about the grounded and stable state, all in one.
-        /// </summary>
         public CharacterActorState CurrentState
         {
             get
@@ -201,9 +170,6 @@ namespace Lightbug.CharacterControllerPro.Core
             }
         }
 
-        /// <summary>
-        /// Returns the character actor state from the previous frame.
-        /// </summary>
         public CharacterActorState PreviousState
         {
             get
@@ -218,10 +184,6 @@ namespace Lightbug.CharacterControllerPro.Core
 
         Dictionary<Transform, Terrain> terrains = new Dictionary<Transform, Terrain>();
         Dictionary<Transform, RigidbodyComponent> groundRigidbodyComponents = new Dictionary<Transform, RigidbodyComponent>();
-
-
-
-        // protected Vector2 bodySize = Vector2.one;
 
         public float GroundedTime { get; private set; }
         public float NotGroundedTime { get; private set; }
@@ -366,21 +328,7 @@ namespace Lightbug.CharacterControllerPro.Core
 
 
         #region public Body properties
-
-        /// <summary>
-        /// Gets the center of the collision shape.
-        /// </summary>
-        public Vector3 Center
-        {
-            get
-            {
-                return GetCenter(Position);
-            }
-        }
-
-        /// <summary>
-        /// Gets the center of the collision shape.
-        /// </summary>
+        public Vector3 Center { get { return GetCenter(Position); } }
         public Vector3 Top
         {
             get
@@ -388,10 +336,6 @@ namespace Lightbug.CharacterControllerPro.Core
                 return GetTop(Position);
             }
         }
-
-        /// <summary>
-        /// Gets the center of the collision shape.
-        /// </summary>
         public Vector3 Bottom
         {
             get
@@ -400,9 +344,6 @@ namespace Lightbug.CharacterControllerPro.Core
             }
         }
 
-        /// <summary>
-        /// Gets the center of the collision shape.
-        /// </summary>
         public Vector3 TopCenter
         {
             get
@@ -410,10 +351,6 @@ namespace Lightbug.CharacterControllerPro.Core
                 return GetTopCenter(Position);
             }
         }
-
-        /// <summary>
-        /// Gets the center of the collision shape.
-        /// </summary>
         public Vector3 BottomCenter
         {
             get
@@ -421,10 +358,6 @@ namespace Lightbug.CharacterControllerPro.Core
                 return GetBottomCenter(Position, 0f);
             }
         }
-
-        /// <summary>
-        /// Gets the center of the collision shape.
-        /// </summary>
         public Vector3 OffsettedBottomCenter
         {
             get
@@ -435,35 +368,19 @@ namespace Lightbug.CharacterControllerPro.Core
 
         #endregion
 
-        #region Body functions
-
-        /// <summary>
-        /// Gets the center of the collision shape.
-        /// </summary>
+        #region Body functions        
         public Vector3 GetCenter(Vector3 position)
         {
             return position + Up * BodySize.y / 2f;
         }
-
-        /// <summary>
-        /// Gets the top most point of the collision shape.
-        /// </summary>
         public Vector3 GetTop(Vector3 position)
         {
             return position + Up * (BodySize.y - CharacterConstants.SkinWidth);
         }
-
-        /// <summary>
-        /// Gets the bottom most point of the collision shape.
-        /// </summary>
         public Vector3 GetBottom(Vector3 position)
         {
             return position + Up * CharacterConstants.SkinWidth;
-        }
-
-        /// <summary>
-        /// Gets the center of the top sphere of the collision shape.
-        /// </summary>
+        }        
         public Vector3 GetTopCenter(Vector3 position)
         {
             return position + Up * (BodySize.y - BodySize.x / 2f);
@@ -570,9 +487,6 @@ namespace Lightbug.CharacterControllerPro.Core
                 Rotation = deltaRotation * Rotation;
             }
         }
-
-        Vector3 forward2D = Vector3.right;
-
         /// <summary>
         /// Gets the current forward direction based on the rigidbody rotation (not necessarily transform.forward).
         /// </summary>
@@ -580,7 +494,7 @@ namespace Lightbug.CharacterControllerPro.Core
         {
             get
             {
-                return Is2D ? forward2D : Rotation * Vector3.forward;
+                return Rotation * Vector3.forward;
             }
             set
             {
@@ -588,18 +502,8 @@ namespace Lightbug.CharacterControllerPro.Core
                 if (value == Vector3.zero)
                     return;
 
-                if (Is2D)
-                {
-                    forward2D = Vector3.Project(value, Right).normalized;
-                }
-                else
-                {
-                    Quaternion deltaRotation = Quaternion.FromToRotation(Forward, value.normalized);
-                    Rotation = deltaRotation * Rotation;
-
-                }
-
-
+                Quaternion deltaRotation = Quaternion.FromToRotation(Forward, value.normalized);
+                Rotation = deltaRotation * Rotation;
             }
         }
 
@@ -634,44 +538,8 @@ namespace Lightbug.CharacterControllerPro.Core
         }
 
 
-        // void AssignVelocity( CharacterVelocityMode velocityAssignmentMode )
-        // {
-
-        // 	switch( velocityAssignmentMode )
-        // 	{
-        // 		case CharacterVelocityMode.UseInputVelocity:
-
-        // 			Velocity = InputVelocity;
-
-        // 			break;
-        // 		case CharacterVelocityMode.UsePreSimulationVelocity:
-
-        // 			Velocity = PreSimulationVelocity;			
-
-        // 			break;
-        // 		case CharacterVelocityMode.UsePostSimulationVelocity:
-
-        // 			break;
-        // 	}
-        // }
-
-
-
-        /// <summary>
-        /// Gets the character velocity vector (Velocity) assigned prior to the FixedUpdate call. This is also known as the "input" velocity, 
-        /// since it is the value the user has specified.
-        /// </summary>
         public Vector3 InputVelocity { get; private set; }
-
-        /// <summary>
-        /// Gets a velocity vector which is the input velocity modified, based on the character actor internal rules (step up, slope limit, etc). 
-        /// This velocity corresponds to the one used by the physics simulation.
-        /// </summary>
         public Vector3 PreSimulationVelocity { get; private set; }
-
-        /// <summary>
-        /// Gets the character velocity as the result of the Physics simulation.
-        /// </summary>
         public Vector3 PostSimulationVelocity { get; private set; }
 
         /// <summary>
@@ -696,38 +564,10 @@ namespace Lightbug.CharacterControllerPro.Core
 
 
 
-        /// <summary>
-        /// This event is called when the character hits its head (not grounded).
-        /// 
-        /// The related collision information struct is passed as an argument.
-        /// </summary>
         public event System.Action<Contact> OnHeadHit;
-
-        /// <summary>
-        /// This event is called everytime the character is blocked by an unallowed geometry, this could be
-        /// a wall or a steep slope (depending on the "slopeLimit" value).
-        /// 
-        /// The related collision information struct is passed as an argument.
-        /// </summary>
         public event System.Action<Contact> OnWallHit;
-
-        /// <summary>
-        /// This event is called everytime the character teleports.
-        /// 
-        /// The teleported position and rotation are passed as arguments.
-        /// </summary>
         public event System.Action<Vector3, Quaternion> OnTeleport;
-
-        /// <summary>
-        /// This event is called when the character enters the grounded state.
-        /// 
-        /// The local linear velocity is passed as an argument.
-        /// </summary>
         public event System.Action<Vector3> OnGroundedStateEnter;
-
-        /// <summary>
-        /// This event is called when the character exits the grounded state.
-        /// </summary>
         public event System.Action OnGroundedStateExit;
 
 
@@ -768,6 +608,7 @@ namespace Lightbug.CharacterControllerPro.Core
         }
 
 
+#if UNITY_EDITOR
         void OnDrawGizmos()
         {
             if (CharacterBody == null)
@@ -785,7 +626,7 @@ namespace Lightbug.CharacterControllerPro.Core
             Gizmos.matrix = Matrix4x4.identity;
 
         }
-
+#endif
 
 
         // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

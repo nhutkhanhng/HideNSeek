@@ -91,10 +91,7 @@ namespace Lightbug.CharacterControllerPro.Core
             targetBodySize = CharacterBody.BodySize;
             BodySize = targetBodySize;
 
-            if (Is2D)
-                PhysicsComponent = gameObject.AddComponent<PhysicsComponent2D>();
-            else
-                PhysicsComponent = gameObject.AddComponent<PhysicsComponent3D>();
+            PhysicsComponent = gameObject.AddComponent<PhysicsComponent3D>();
 
             SetColliderSize();
 

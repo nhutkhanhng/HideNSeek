@@ -13,113 +13,36 @@ namespace Lightbug.CharacterControllerPro.Core
         /// <summary>
         /// Returns true if the character is standing on an edge.
         /// </summary>
-        public bool IsOnEdge
-        {
-            get
-            {
-                return characterCollisionInfo.isOnEdge;
-            }
-        }
+        public bool IsOnEdge { get { return characterCollisionInfo.isOnEdge; } }
 
         /// <summary>
         /// Gets the grounded state, true if the ground object is not null, false otherwise.
         /// </summary>
-        public bool IsGrounded //{ get; private set }
-        {
-            get
-            {
-                return characterCollisionInfo.groundObject != null;
-            }
-        }
+        public bool IsGrounded { get { return characterCollisionInfo.groundObject != null; } }
 
 
         /// <summary>
         /// Gets the angle between the up vector and the stable normal.
         /// </summary>
-        public float GroundSlopeAngle
-        {
-            get
-            {
-                return characterCollisionInfo.groundSlopeAngle;
-            }
-        }
+        public float GroundSlopeAngle { get { return characterCollisionInfo.groundSlopeAngle; } }
 
         /// <summary>
         /// Gets the contact point obtained directly from the ground test (sphere cast).
         /// </summary>
-        public Vector3 GroundContactPoint
-        {
-            get
-            {
-                return characterCollisionInfo.groundContactPoint;
-            }
-        }
+        public Vector3 GroundContactPoint { get { return characterCollisionInfo.groundContactPoint; } }
 
         /// <summary>
         /// Gets the normal vector obtained directly from the ground test (sphere cast).
         /// </summary>
-        public Vector3 GroundContactNormal
-        {
-            get
-            {
-                return characterCollisionInfo.groundContactNormal;
-            }
-        }
-
-        /// <summary>
-        /// Gets the normal vector used to determine stability. This may or may not be the normal obtained from the ground test.
-        /// </summary>
-        public Vector3 GroundStableNormal
-        {
-            get
-            {
-                return IsStable ? characterCollisionInfo.groundStableNormal : Up;
-            }
-        }
-
-        /// <summary>
-        /// Gets the GameObject component of the current ground.
-        /// </summary>
-        public GameObject GroundObject
-        {
-            get
-            {
-                return characterCollisionInfo.groundObject;
-            }
-        }
-
-        /// <summary>
-        /// Gets the Transform component of the current ground.
-        /// </summary>
-        public Transform GroundTransform
-        {
-            get
-            {
-                return GroundObject != null ? GroundObject.transform : null;
-            }
-        }
-
-        /// <summary>
-        /// Gets the Collider2D component of the current ground.
-        /// </summary>
-        public Collider2D GroundCollider2D
-        {
-            get
-            {
-                return characterCollisionInfo.groundCollider2D;
-            }
-        }
+        public Vector3 GroundContactNormal { get { return characterCollisionInfo.groundContactNormal; } }
+        public Vector3 GroundStableNormal { get { return IsStable ? characterCollisionInfo.groundStableNormal : Up; } }
+        public GameObject GroundObject { get { return characterCollisionInfo.groundObject; } }
+        public Transform GroundTransform { get { return GroundObject != null ? GroundObject.transform : null; } }
 
         /// <summary>
         /// Gets the Collider3D component of the current ground.
         /// </summary>
-        public Collider GroundCollider3D
-        {
-            get
-            {
-                return characterCollisionInfo.groundCollider3D;
-            }
-        }
+        public Collider GroundCollider3D { get { return characterCollisionInfo.groundCollider3D; } }
 
 
         // Wall ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────	
@@ -127,43 +50,20 @@ namespace Lightbug.CharacterControllerPro.Core
         /// <summary>
         /// Gets the wall collision flag, true if the character hit a wall, false otherwise.
         /// </summary>
-        public bool WallCollision
-        {
-            get
-            {
-                return characterCollisionInfo.wallCollision;
-            }
-        }
+        public bool WallCollision { get { return characterCollisionInfo.wallCollision; } }
 
         /// <summary>
         /// Gets the angle between the contact normal (wall collision) and the Up direction.
         /// </summary>	
-        public float WallAngle
-        {
-            get
-            {
-                return characterCollisionInfo.wallAngle;
-            }
-        }
-
+        public float WallAngle { get { return characterCollisionInfo.wallAngle; } }
 
         /// <summary>
         /// Gets the current contact (wall collision).
         /// </summary>
-        public Contact WallContact
-        {
-            get
-            {
-                return characterCollisionInfo.wallContact;
-            }
-        }
+        public Contact WallContact { get { return characterCollisionInfo.wallContact; } }
 
 
         // Head ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────	
-
-        /// <summary>
-        /// Gets the head collision flag, true if the character hits something with its head, false otherwise.
-        /// </summary>
         public bool HeadCollision
         {
             get
@@ -171,10 +71,6 @@ namespace Lightbug.CharacterControllerPro.Core
                 return characterCollisionInfo.headCollision;
             }
         }
-
-        /// <summary>
-        /// Gets the angle between the contact normal (head collision) and the Up direction.
-        /// </summary>
         public float HeadAngle
         {
             get
@@ -183,9 +79,6 @@ namespace Lightbug.CharacterControllerPro.Core
             }
         }
 
-        /// <summary>
-        /// Gets the current contact (head collision).
-        /// </summary>
         public Contact HeadContact
         {
             get
@@ -195,10 +88,6 @@ namespace Lightbug.CharacterControllerPro.Core
         }
 
         // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-
-        /// <summary>
-        /// Gets the current stability state of the character. Stability is equal to "grounded + slope angle <= slope limit".
-        /// </summary>
         public bool IsStable
         {
             get
@@ -206,10 +95,6 @@ namespace Lightbug.CharacterControllerPro.Core
                 return IsGrounded && characterCollisionInfo.groundSlopeAngle <= slopeLimit;
             }
         }
-
-        /// <summary>
-        /// Returns true if the character is grounded onto an unstable ground, false otherwise.
-        /// </summary>
         public bool IsOnUnstableGround
         {
             get
@@ -217,22 +102,8 @@ namespace Lightbug.CharacterControllerPro.Core
                 return IsGrounded && characterCollisionInfo.groundSlopeAngle > slopeLimit;
             }
         }
-
-        /// <summary>
-        /// Gets the previous grounded state.
-        /// </summary>
         public bool WasGrounded { get; private set; }
-
-        /// <summary>
-        /// Gets the previous stability state.
-        /// </summary>
         public bool WasStable { get; private set; }
-
-
-
-        /// <summary>
-        /// Gets the RigidbodyComponent component from the ground.
-        /// </summary>
         public RigidbodyComponent GroundRigidbodyComponent
         {
             get
@@ -245,32 +116,21 @@ namespace Lightbug.CharacterControllerPro.Core
         }
 
         RigidbodyComponent groundRigidbodyComponent = null;
-
-        /// <summary>
-        /// Returns true if the current ground is a Rigidbody (2D or 3D), false otherwise.
-        /// </summary>
         public bool IsGroundARigidbody
         {
             get
             {
-                return Is2D ? characterCollisionInfo.groundRigidbody2D != null : characterCollisionInfo.groundRigidbody3D != null;
+                return characterCollisionInfo.groundRigidbody3D != null;
             }
         }
-
-        /// <summary>
-        /// Returns true if the current ground is a kinematic Rigidbody (2D or 3D), false otherwise.
-        /// </summary>
         public bool IsGroundAKinematicRigidbody
         {
             get
             {
-                return Is2D ? characterCollisionInfo.groundRigidbody2D.isKinematic : characterCollisionInfo.groundRigidbody3D.isKinematic;
+                return characterCollisionInfo.groundRigidbody3D.isKinematic;
             }
         }
 
-        /// <summary>
-        /// Returns true if the current ground is a kinematic Rigidbody (2D or 3D), false otherwise.
-        /// </summary>
         public Vector3 DynamicGroundPointVelocity
         {
             get
@@ -283,11 +143,6 @@ namespace Lightbug.CharacterControllerPro.Core
             }
         }
 
-
-
-        /// <summary>
-        /// Gets a concatenated string containing all the current collision information.
-        /// </summary>
         public override string ToString()
         {
             const string nullString = " ---- ";
@@ -468,27 +323,11 @@ namespace Lightbug.CharacterControllerPro.Core
             characterCollisions.Initialize(Actor, PhysicsCompoenent);
         }
 
-        /// <summary>
-        /// Applies a force at the ground contact point, in the direction of the weight (mass times gravity).
-        /// </summary>
         protected virtual void ApplyWeight(Vector3 contactPoint)
         {
             if (!applyWeightToGround)
                 return;
 
-
-            if (Is2D)
-            {
-                if (GroundCollider2D == null)
-                    return;
-
-                if (GroundCollider2D.attachedRigidbody == null)
-                    return;
-
-
-                GroundCollider2D.attachedRigidbody.AddForceAtPosition(-transform.up * CharacterBody.Mass * weightGravity, contactPoint);
-            }
-            else
             {
                 if (GroundCollider3D == null)
                     return;
@@ -496,15 +335,8 @@ namespace Lightbug.CharacterControllerPro.Core
                 if (GroundCollider3D.attachedRigidbody == null)
                     return;
 
-
                 GroundCollider3D.attachedRigidbody.AddForceAtPosition(-transform.up * CharacterBody.Mass * weightGravity, contactPoint);
             }
-
-
         }
-
-
-
     }
-
 }

@@ -132,10 +132,7 @@ namespace Lightbug.CharacterControllerPro.Core
                                 Vector3 remainingVelocity = displacement - collisionInfo.displacement;
                                 Vector3 force = CharacterBody.Mass * (remainingVelocity / Time.deltaTime);
 
-                                if (Is2D)
-                                    collisionInfo.hitInfo.rigidbody2D.AddForceAtPosition(force, position);
-                                else
-                                    collisionInfo.hitInfo.rigidbody3D.AddForceAtPosition(force, position);
+                                collisionInfo.hitInfo.rigidbody3D.AddForceAtPosition(force, position);
                             }
 
                         }

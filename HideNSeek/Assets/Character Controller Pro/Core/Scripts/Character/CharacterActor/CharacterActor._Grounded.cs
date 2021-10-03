@@ -65,23 +65,11 @@ namespace Lightbug.CharacterControllerPro.Core
                     {
                         if (groundRigidbodyComponent == null)
                         {
-                            if (Is2D)
+                            if (GroundCollider3D.attachedRigidbody != null)
                             {
-                                if (GroundCollider2D.attachedRigidbody != null)
-                                {
-                                    Vector3 groundDisplacement = ReferenceRigidbodyDisplacement(position, GroundCollider2D.attachedRigidbody, dt);
-                                    groundVelocity = groundDisplacement / dt;
+                                Vector3 groundDisplacement = ReferenceRigidbodyDisplacement(position, GroundCollider3D.attachedRigidbody, dt);
+                                groundVelocity = groundDisplacement / dt;
 
-                                }
-                            }
-                            else
-                            {
-                                if (GroundCollider3D.attachedRigidbody != null)
-                                {
-                                    Vector3 groundDisplacement = ReferenceRigidbodyDisplacement(position, GroundCollider3D.attachedRigidbody, dt);
-                                    groundVelocity = groundDisplacement / dt;
-
-                                }
                             }
                         }
 

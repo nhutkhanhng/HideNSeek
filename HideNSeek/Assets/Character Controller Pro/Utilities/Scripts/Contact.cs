@@ -25,11 +25,6 @@ public struct Contact
     public Vector3 normal;
 
     /// <summary>
-    /// The 2D collider component associated with the collided object.
-    /// </summary>
-    public Collider2D collider2D;
-
-    /// <summary>
     /// The 3D collider component associated with the collided object.
     /// </summary>
     public Collider collider3D;
@@ -81,31 +76,6 @@ public struct Contact
             // this.relativeVelocity = contactRigidbody.GetRelativePointVelocity( this.point );
         }  
     }
-
-    /// <summary>
-    /// Sets all the structs fields, based on the callback ("enter" or "stay") and the 2D contact.
-    /// </summary>
-    public void Set( bool firstContact , ContactPoint2D contact , Collision2D collision )
-    {
-
-        this.firstContact = firstContact;
-        this.collider2D = contact.collider;            
-        this.point = contact.point;
-        this.normal = contact.normal;            
-        this.gameObject = this.collider2D.gameObject;
-
-        Rigidbody2D contactRigidbody = this.collider2D.attachedRigidbody;
-
-        this.relativeVelocity = collision.relativeVelocity;
-
-        if( this.isRigidbody = contactRigidbody != null )
-        {
-            this.isKinematicRigidbody = contactRigidbody.isKinematic;
-            this.pointVelocity = contactRigidbody.GetPointVelocity( this.point );  
-            // this.relativeVelocity = contact.relativeVelocity;
-        }  
-    }
-
 
 }
 

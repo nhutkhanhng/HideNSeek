@@ -64,10 +64,6 @@ namespace Lightbug.CharacterControllerPro.Core
                         CurrentTerrain = null;
                         groundRigidbodyComponent = null;
                     }
-
-
-
-
                 }
                 else
                 {

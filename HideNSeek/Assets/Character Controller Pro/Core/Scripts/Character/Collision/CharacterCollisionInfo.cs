@@ -36,10 +36,7 @@ public struct CharacterCollisionInfo
 	public int groundLayer;
 
 	public Collider groundCollider3D;
-    public Collider2D groundCollider2D;
 	public Rigidbody groundRigidbody3D;
-    public Rigidbody2D groundRigidbody2D;	
-	
 	// ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 	/// <summary>
@@ -88,9 +85,8 @@ public struct CharacterCollisionInfo
 			
 			groundObject = collisionInfo.hitInfo.transform.gameObject;
 			groundLayer = groundObject.layer;
-			groundCollider2D = collisionInfo.hitInfo.collider2D; 
+
 			groundCollider3D = collisionInfo.hitInfo.collider3D; 
-			groundRigidbody2D = collisionInfo.hitInfo.rigidbody2D;
 			groundRigidbody3D = collisionInfo.hitInfo.rigidbody3D;
 		}
 		else
@@ -116,11 +112,7 @@ public struct CharacterCollisionInfo
 		if( groundObject != null )
 		{
 			groundLayer = groundObject.layer;
-			groundCollider2D = contact.collider2D; 
 			groundCollider3D = contact.collider3D; 
-
-			if( contact.collider2D != null )
-				groundRigidbody2D = contact.collider2D.attachedRigidbody;
 
 			if( contact.collider3D != null )
 				groundRigidbody3D = contact.collider3D.attachedRigidbody;
@@ -147,8 +139,7 @@ public struct CharacterCollisionInfo
 
 		groundObject = null;
 		groundLayer = 0;
-		groundCollider3D = null;
-        groundCollider2D = null;
+		groundCollider3D = null;        
 	}
 
 	// ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
